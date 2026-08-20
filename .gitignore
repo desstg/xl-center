@@ -6,7 +6,6 @@ data/
 
 # 数据与个人文件（不随仓库发布）
 server/data/
-mapping_actor.xml
 1.png
 claude-launcher.ps1
 时间计划.txt
