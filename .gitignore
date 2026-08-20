@@ -1,0 +1,18 @@
+node_modules/
+dist/
+data/
+*.log
+.DS_Store
+
+# 数据与个人文件（不随仓库发布）
+server/data/
+mapping_actor.xml
+1.png
+claude-launcher.ps1
+时间计划.txt
+Claude_Code_命令说明.md
+
+# 工具与缓存
+.claude/
+*.tsbuildinfo
+CLAUDE.md

@@ -1,0 +1,27 @@
+services:
+  xl-center:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: desstg/xl-center:latest
+    container_name: xl-center
+    ports:
+      - "8899:8899"   # 后端 API + 前端页面（同端口）
+    volumes:
+      # 数据持久化（SQLite 数据库 + 缩略图缓存）
+      - ./data:/app/data
+      # 媒体库目录（改成你群晖上的实际路径；可写挂载，编辑 NFO/裁剪海报要写文件）
+      - /volume1/媒体库:/media
+    environment:
+      - XL_DATA_DIR=/app/data
+      - FFMPEG_PATH=/usr/bin/ffmpeg
+      - FFPROBE_PATH=/usr/bin/ffprobe
+      - LIBVA_DRIVER_NAME=iHD
+      # 登录账号密码（可选）：取消下面两行注释并填上账号密码即可启用登录；
+      # 不设置则无登录，直接进主界面（不弹登录框）
+      # - AUTH_USERNAME=admin
+      # - AUTH_PASSWORD=admin123
+    devices:
+      # 核显透传，用于 VAAPI 硬件转码（4K HEVC → 1080p H264）
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
